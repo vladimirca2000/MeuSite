@@ -2,6 +2,102 @@
 
 <PageTitle>Home</PageTitle>
 
-<h1>Hello, world!</h1>
+<link rel="stylesheet" href="/css/matrix.css" />
 
-Welcome to your new app.
+<div class="matrix-root">
+  <canvas id="matrix-canvas"></canvas>
+
+  <div class="matrix-overlay">
+    <div class="matrix-panel" role="region" aria-label="Painel principal">
+      <h1 tabindex="-1">Vladimir C. Alves</h1>
+      <p tabindex="-1">Pagina profissional do Vladimir. Clique em ENTRE para começar.</p>
+      <button class="matrix-btn" id="matrix-enter">ENTRE</button>
+    </div>
+
+    <!-- Responsive panel that appears on click -->
+    <div class="matrix-expanded-panel" id="expanded-panel" style="display: none;">
+      <div class="expanded-content">
+        <!-- Background image -->
+        <img src="/image/MorfelMatrix.jpg" alt="Fundo Morfel Matrix" class="expanded-img" />
+        <!-- Texts above image -->
+        <div class="expanded-inner">
+          <h2>Faça sua Escolha</h2>
+          <p>Escolha a pílula azul e permaneça na Matrix, ou a pílula vermelha para descobrir mais.</p>
+        </div>
+        <!-- Close button -->
+        <button class="expanded-close" id="expanded-close">×</button>
+        <!-- Clickable areas over image -->
+        <a class="pill-area pill-left" href="/vermelho" aria-label="Pílula Vermelha" title="Pílula Vermelha"></a>
+        <a class="pill-area pill-right" href="/azul" aria-label="Pílula Azul" title="Pílula Azul"></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/js/matrix.js"></script>
+
+<script>
+  // Mantém o painel fixo ao clicar em 'ENTRE' e fornece feedback visual
+  (function(){
+    const btn = document.getElementById('matrix-enter');
+    if(!btn) return;
+    btn.setAttribute('aria-pressed', 'false');
+    // Focus on button when page loads
+    window.addEventListener('load', () => btn.focus());
+    btn.addEventListener('click', () => {
+      // Não escondemos o painel; apenas aplicamos um pulso visual na borda
+      btn.classList.add('clicked');
+      btn.setAttribute('aria-pressed', 'true');
+      const panel = document.querySelector('.matrix-panel');
+      if(panel && panel.animate) {
+        panel.animate([
+          { boxShadow: '0 8px 34px rgba(0,255,65,0.06), 0 0 12px rgba(0,255,65,0.06) inset' },
+          { boxShadow: '0 18px 54px rgba(0,255,65,0.20), 0 0 22px rgba(0,255,65,0.12) inset' },
+          { boxShadow: '0 8px 34px rgba(0,255,65,0.06), 0 0 12px rgba(0,255,65,0.06) inset' }
+        ], { duration: 600, easing: 'ease-out' });
+      }
+      // remove a classe 'clicked' após feedback para permitir re-feedbacks
+      setTimeout(() => btn.classList.remove('clicked'), 700);
+    });
+  })();
+
+  // Handle panel expansion
+  (function(){
+    const enterBtn = document.getElementById('matrix-enter');
+    const expandedPanel = document.getElementById('expanded-panel');
+    const closeBtn = document.getElementById('expanded-close');
+    if(!enterBtn || !expandedPanel) return;
+
+    function showPanel(){
+      expandedPanel.style.display = 'flex';
+      expandedPanel.classList.add('open');
+      // Focus on close button
+      if(closeBtn) closeBtn.focus();
+    }
+
+    function hidePanel(){
+      expandedPanel.classList.remove('open');
+      setTimeout(() => expandedPanel.style.display = 'none', 300);
+      enterBtn.focus();
+    }
+
+    enterBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      showPanel();
+    });
+
+    if(closeBtn) closeBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      hidePanel();
+    });
+
+    // Close on outside click or Esc
+    expandedPanel.addEventListener('click', (e) => {
+      if(e.target === expandedPanel) hidePanel();
+    });
+
+    window.addEventListener('keydown', (e) => {
+      if(e.key === 'Escape' && expandedPanel.classList.contains('open')) hidePanel();
+    });
+  })();
+</script>
