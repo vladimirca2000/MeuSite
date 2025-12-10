@@ -1,0 +1,43 @@
+.azul-root{width:100%;min-height:calc(100vh - 120px);display:block}
+
+/* Full-width carousel container */
+.azul-carousel-full{width:100%;position:relative;overflow:hidden;margin:0;padding:0}
+.azul-carousel{width:100%;height:100%;display:block}
+.azul-carousel-track{height:100%;display:flex;align-items:center;transition:transform 600ms cubic-bezier(.22,.9,.36,1)}
+
+/* Slides: center 50% and sides 25% to show halves */
+.azul-slide{flex:0 0 auto;box-sizing:border-box;transition:transform 300ms ease, opacity 300ms ease;overflow:hidden;position:relative}
+.azul-slide img{display:block;width:100%;height:100%;object-fit:cover}
+
+/* overlay - centered panel with fade-in; background 50% black and padding 5% */
+.slide-overlay{position:absolute;left:50%;top:25%;transform:translate(-50%,8px);display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.5);color:var(--azul-accent);padding:5%;border-radius:8px;text-align:center;font-weight:700;z-index:5;opacity:0;visibility:hidden;transition:opacity 420ms ease,transform 420ms ease,visibility 420ms;font-size:3rem;line-height:1}
+.azul-slide{width:25vw;height:70vh}
+.azul-slide.active{width:50vw;transform:scale(1.02);box-shadow:0 8px 24px rgba(0,0,0,0.35)}
+
+/* show overlay when slide is active (fade-in) */
+.azul-slide.active .slide-overlay{opacity:1;visibility:visible;transform:translate(-50%,0);display:flex}
+
+/* second overlay positioned 10% below primary */
+.slide-overlay-2{position:absolute;left:50%;top:calc(25% + 10%);transform:translate(-50%,8px);display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.5);color:var(--azul-text);padding:4%;border-radius:8px;text-align:center;font-weight:600;z-index:5;opacity:0;visibility:hidden;transition:opacity 420ms ease,transform 420ms ease,visibility 420ms;font-size:2.1rem}
+.azul-slide.active .slide-overlay-2{opacity:1;visibility:visible;transform:translate(-50%,0);display:flex}
+
+/* small screens adjust */
+@media (max-width:900px){
+  .azul-slide{width:40vw;height:50vh}
+  .azul-slide.active{width:80vw}
+  .slide-overlay{padding:6%;font-size:1.25rem}
+  .slide-overlay-2{padding:5%;font-size:1.05rem}
+}
+
+.carousel-prev,.carousel-next{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.45);color:#fff;border:none;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:10}
+.carousel-prev{left:12px}
+.carousel-next{right:12px}
+
+.carousel-dots{position:absolute;left:50%;transform:translateX(-50%);bottom:8px;display:flex;gap:6px;z-index:10}
+.carousel-dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,0.5);border:none}
+.carousel-dot.active{background:rgba(255,255,255,0.95)}
+
+/* content below carousel - full width but centered inner */
+.azul-main-body{padding:2rem 1rem;color:var(--azul-text)}
+.azul-content{max-width:1200px;padding:0 1rem;margin:0 auto;text-align:left}
+.azul-cta{display:inline-block;margin-top:1rem;padding:0.6rem 1rem;background:var(--azul-accent);color:#00293b;border-radius:6px;text-decoration:none}

@@ -1,5 +1,85 @@
-bin/
-obj/
-/packages/
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.VC.db
+*.VC.opendb
+
+# Build output
+[Bb]in/
+[Oo]bj/
+**/bin/
+**/obj/
+
+# NuGet
+*.nupkg
+packages/
+project.lock.json
+.nuget/
+
+# Dotnet publish
+publish/
+PublishOutput/
+artifacts/
+
+# Visual Studio Code
+.vscode/
+*.code-workspace
+.vscode/*
+
+# Rider
+.idea/
+*.sln.iml
+
+# ReSharper
+_ReSharper*/
+*._ReSharper*/
+*.DotSettings.user
+
+# IIS Express
+/.vs/Config/applicationhost.config
+
+# User-specific files
+secrets.json
+.env
+.env.*
+Properties/launchSettings.json
+*.user
+*.userosscache
+*.suo
+
+# Node/npm
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Test results / coverage
+TestResults/
+coverage/
+
+# Logs, databases, debug
+*.log
+*.vspscc
+*.vssscc
+*.dbmdl
+*.mdf
+*.ldf
+
+# Binary files
+*.pdb
+*.exe
+*.dll
+*.app
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# MonoDevelop
+*.userprefs
+
+# Misc
 riderModule.iml
 /_ReSharper.Caches/

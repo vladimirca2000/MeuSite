@@ -1,0 +1,43 @@
+@namespace MeuSite.Layout
+@inherits LayoutComponentBase
+
+<link rel="stylesheet" href="/css/azul-layout.css" />
+
+<div class="azul-layout-root">
+  <header class="azul-header">
+    <nav class="azul-nav">
+      <div class="azul-nav-inner">
+        <div class="azul-left">
+          <a href="/azul" class="azul-logo-link">
+            <img src="/image/SistemaLegado.png" alt="logo" class="azul-logo" />
+          </a>
+        </div>
+
+        <!-- mobile toggle button -->
+        <button id="nav-toggle" class="nav-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav-menu">
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+        </button>
+
+        <div id="nav-menu" class="azul-right">
+          <a href="/azul" class="azul-nav-link">Home</a>
+          <a href="/azul/sobre" class="azul-nav-link">Sobre</a>
+          <a href="/azul/portfolio" class="azul-nav-link">Portifolio</a>
+          <a href="/azul/contato" class="azul-nav-link">Contato</a>
+          <a href="/" class="azul-nav-link azul-inicial">Inicio</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="azul-body">
+    @Body
+  </div>
+
+  <footer class="azul-footer">
+    <p>Desenvolvido por Vladimir Carlos Alves</p>
+  </footer>
+</div>
+
+<script src="/js/azul-nav.js"></script>

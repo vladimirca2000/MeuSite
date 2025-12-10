@@ -1,10 +1,23 @@
 @page "/azul"
+@layout AzulLayout
 
-<PageTitle>Azul</PageTitle>
+<PageTitle>Azul - Home</PageTitle>
 
-<div style="padding:2rem; text-align:center; color: #b7ffb7;">
-  <h1 style="color: #00c853;">Você escolheu a pílula azul</h1>
-  <p style="max-width:720px; margin: 0.5rem auto;">Você optou por permanecer na Matrix. Esta página pode conter informações sobre manutenção, serviços legados ou contato.</p>
-  <p style="margin-top:1.2rem;"><a href="/" style="color:#00ff41; text-decoration:underline;">Voltar</a></p>
-</div>
+<link rel="stylesheet" href="/css/azul-home.css" />
+
+<section class="azul-root">
+  <!-- full-width carousel (spans entire viewport) -->
+  <div class="azul-carousel-full">
+    <div id="azul-carousel" class="azul-carousel" aria-roledescription="carousel">
+      <!-- Images from /image/carrossel will be loaded by script -->
+    </div>
+    <button class="carousel-prev" aria-label="Anterior">‹</button>
+    <button class="carousel-next" aria-label="Próximo">›</button>
+    <div class="carousel-dots" aria-hidden="false"></div>
+  </div>
+
+  
+</section>
+
+<script src="/js/azul-carousel.js"></script>
 
