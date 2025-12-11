@@ -5,19 +5,53 @@
 
 <link rel="stylesheet" href="/css/azul-home.css" />
 
-<section class="azul-root">
-  <!-- full-width carousel (spans entire viewport) -->
+<section class="azul-hero" id="home">
+  <canvas id="spiderweb-canvas" class="spider-canvas" aria-hidden="true"></canvas>
+  <div class="azul-hero-inner">
+    <div class="hero-panel">
+      <h1 class="hero-title">Vladimir Carlos Alves</h1>
+      <p class="hero-sub"><br/>
+        <span class="hero-rotator">Desenvolvedor Back-End</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="sobre" class="azul-section azul-about">
+  <div class="container-centered">
+    <h2>Sobre</h2>
+    <p class="about-text">Desenvolvedor Full Stack Sênior com mais de duas décadas de experiência em arquitetura de software e análise de dados. Especialista em resolver problemas complexos através da tecnologia, com histórico comprovado de inovação em empresas como Odebrecht, ICN e Havan.</p>
+    <p class="about-text">Recentemente, consolidei minha expertise em Automação e RPA utilizando Python na Minas Verde (John Deere), desenvolvendo soluções que aumentaram a eficiência operacional. Essa fase atual é fruto de uma trajetória de reconstrução profissional vivenciada na CTVoicer.</p>
+    <p class="about-text">Neste ambiente, o suporte de uma equipe de excelência foi fundamental para que eu superasse a síndrome do impostor pós-burnout. Essa experiência de "choque de realidade" não apenas restaurou minha performance técnica, mas aprimorou minha inteligência emocional e resiliência perante desafios críticos.</p>
+  </div>
+</section>
+
+<section class="azul-carousel-section">
   <div class="azul-carousel-full">
     <div id="azul-carousel" class="azul-carousel" aria-roledescription="carousel">
-      <!-- Images from /image/carrossel will be loaded by script -->
+      <!-- Images loaded by /js/azul-carousel.js -->
     </div>
     <button class="carousel-prev" aria-label="Anterior">‹</button>
     <button class="carousel-next" aria-label="Próximo">›</button>
     <div class="carousel-dots" aria-hidden="false"></div>
   </div>
-
-  
 </section>
 
+<section id="myStacks" class="azul-section azul-mystacks">
+  <div class="container-centered">
+    <h2>MyStacks</h2>
+    <p>Projetos e trabalhos selecionados. (em construção)</p>
+  </div>
+</section>
+
+<section id="contato" class="azul-section azul-contact">
+  <div class="container-centered">
+    <h2>Contato</h2>
+    <p>Formas de contato e redes. (em construção)</p>
+  </div>
+</section>
+
+<script src="/js/azul-web.js"></script>
 <script src="/js/azul-carousel.js"></script>
+<script src="/js/azul-rotator.js"></script>
 

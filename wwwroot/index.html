@@ -1,21 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pagina Vladimir</title>
     <base href="/" />
-    <link rel="preload" id="webassembly" />
-    <!-- site icon (favicon) -->
-    <link rel="icon" type="image/png" href="image/SistemaLegado.png" />
+
+    <!-- Responsive icons for different devices / PWA -->
+    <link rel="icon" type="image/png" sizes="192x192" href="/image/icon-192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/image/icon-512.png" />
+    <!-- fallback favicon -->
+    <link rel="icon" type="image/png" href="/image/SistemaLegado.png" />
+
+    <!-- Apple touch icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/image/icon-192.png" />
+    <link rel="apple-touch-icon" sizes="512x512" href="/image/icon-512.png" />
+
+    <!-- Theme color for mobile UI (status bar) -->
+    <meta name="theme-color" content="#0b3d91" />
+
     <link rel="stylesheet" href="css/app.css" />
     <!-- If you add any scoped CSS files, uncomment the following to load them
     <link href="MeuSite.styles.css" rel="stylesheet" /> -->
     <link href="manifest.webmanifest" rel="manifest" />
     <!-- apple touch icon fallback to the provided image -->
-    <link rel="apple-touch-icon" sizes="512x512" href="image/SistemaLegado.png" />
-    <link rel="apple-touch-icon" sizes="192x192" href="image/SistemaLegado.png" />
+    <!-- previous icon links removed in favor of responsive ones above -->
     <script type="importmap"></script>
 </head>
 

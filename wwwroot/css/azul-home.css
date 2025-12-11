@@ -1,43 +1,106 @@
 .azul-root{width:100%;min-height:calc(100vh - 120px);display:block}
 
-/* Full-width carousel container */
-.azul-carousel-full{width:100%;position:relative;overflow:hidden;margin:0;padding:0}
-.azul-carousel{width:100%;height:100%;display:block}
-.azul-carousel-track{height:100%;display:flex;align-items:center;transition:transform 600ms cubic-bezier(.22,.9,.36,1)}
+/* Hero full-screen with background blur */
+.azul-hero{height:100vh;background-image:url('/image/Principal.jpg');background-size:cover;background-position:center;display:flex;align-items:center;justify-content:center;position:relative}
+.azul-hero::before{content:"";position:absolute;inset:0;background-image:url('/image/Principal.jpg');background-size:cover;background-position:center;filter:blur(8px) brightness(0.6);opacity:0.7;z-index:0}
+.azul-hero-inner{position:relative;z-index:2}
+.spider-canvas{position:absolute;left:0;top:0;width:100%;height:100%;z-index:1;pointer-events:auto}
+.hero-panel{background:rgba(0,0,0,0.5);padding:3rem;border-radius:10px;max-width:900px;text-align:center}
+.hero-title{font-size:clamp(2rem,5vw,3.5rem);color:#fff;margin:0}
+.hero-sub{color:rgba(255,255,255,0.9);margin-top:1.25rem}
+.hero-sub{font-size:clamp(1.2rem,3.5vw,2.4rem);}
 
-/* Slides: center 50% and sides 25% to show halves */
-.azul-slide{flex:0 0 auto;box-sizing:border-box;transition:transform 300ms ease, opacity 300ms ease;overflow:hidden;position:relative}
-.azul-slide img{display:block;width:100%;height:100%;object-fit:cover}
+/* rotator text inside hero-sub */
+.hero-rotator{display:inline-block;transition:opacity 900ms ease, transform 900ms ease;font-size:inherit}
+.hero-rotator.fade-out{opacity:0;transform:translateY(-6px)}
+.hero-rotator.fade-in{opacity:1;transform:translateY(0)}
 
-/* overlay - centered panel with fade-in; background 50% black and padding 5% */
-.slide-overlay{position:absolute;left:50%;top:25%;transform:translate(-50%,8px);display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.5);color:var(--azul-accent);padding:5%;border-radius:8px;text-align:center;font-weight:700;z-index:5;opacity:0;visibility:hidden;transition:opacity 420ms ease,transform 420ms ease,visibility 420ms;font-size:3rem;line-height:1}
-.azul-slide{width:25vw;height:70vh}
-.azul-slide.active{width:50vw;transform:scale(1.02);box-shadow:0 8px 24px rgba(0,0,0,0.35)}
+/* About section occupies 50% of viewport height */
+.azul-about{background:#e6f6ff;color:#1e4f7a;padding:3.5rem 1.5rem;height:50vh;display:flex;align-items:center}
+.azul-about .container-centered{width:100%;max-width:1000px}
+.azul-about h2{color:#00293b;margin-top:0;font-size:clamp(2rem,6vw,3.5rem);line-height:1;text-align:center}
+.azul-about .about-text{color:#1e4f7a;margin-bottom:1.75rem;line-height:1.8;font-size:clamp(1rem,2.2vw,1.25rem)}
 
-/* show overlay when slide is active (fade-in) */
-.azul-slide.active .slide-overlay{opacity:1;visibility:visible;transform:translate(-50%,0);display:flex}
+/* Carousel section occupies 50% of viewport height and uses 4-column layout 15/35/35/15 */
+.azul-carousel-section{height:50vh;display:grid;grid-template-columns:15% 35% 35% 15%;align-items:center}
+.azul-carousel-full{grid-column:1 / span 4;width:100%;height:100%;position:relative;overflow:hidden}
+.azul-carousel{width:100%;height:100%;display:grid;grid-template-columns:15% 35% 35% 15%;align-items:center}
 
-/* second overlay positioned 10% below primary */
-.slide-overlay-2{position:absolute;left:50%;top:calc(25% + 10%);transform:translate(-50%,8px);display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.5);color:var(--azul-text);padding:4%;border-radius:8px;text-align:center;font-weight:600;z-index:5;opacity:0;visibility:hidden;transition:opacity 420ms ease,transform 420ms ease,visibility 420ms;font-size:2.1rem}
-.azul-slide.active .slide-overlay-2{opacity:1;visibility:visible;transform:translate(-50%,0);display:flex}
+/* slots layout inside carousel: each direct child occupies one grid column */
+.azul-slot{height:100%;box-sizing:border-box;position:relative;overflow:visible}
+.azul-carousel > .azul-slot{display:block}
+.slot-img{width:100%;height:100%;object-fit:cover;display:block}
 
-/* small screens adjust */
-@media (max-width:900px){
-  .azul-slide{width:40vw;height:50vh}
-  .azul-slide.active{width:80vw}
-  .slide-overlay{padding:6%;font-size:1.25rem}
-  .slide-overlay-2{padding:5%;font-size:1.05rem}
+/* Use a very subtle fixed blur so image remains recognizable */
+.slot-img{filter:blur(2px); -webkit-filter:blur(2px);}
+
+/* very subtle blue overlay above images (3% opacity) but below text overlays */
+.azul-slot::after{content:"";position:absolute;inset:0;background:rgba(0,123,255,0.03);pointer-events:none;z-index:1}
+
+/* ensure images are underneath overlays */
+.slot-img{position:relative;z-index:0}
+
+/* default: hide overlays for all slots (desktop will enable for middle slots) */
+.slot-overlay-primary, .slot-overlay-secondary{display:none}
+
+/* show overlays only for the two middle 35% slots on desktop */
+.azul-slot.slot-1 .slot-overlay-primary,
+.azul-slot.slot-1 .slot-overlay-secondary,
+.azul-slot.slot-2 .slot-overlay-primary,
+.azul-slot.slot-2 .slot-overlay-secondary{
+  display:flex;
 }
 
-.carousel-prev,.carousel-next{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.45);color:#fff;border:none;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:10}
-.carousel-prev{left:12px}
-.carousel-next{right:12px}
+/* primary and secondary overlays with fixed primary height and gap of 5% between them */
+.slot-overlay-primary{
+  position:absolute;
+  left:50%;
+  top:auto; /* JS will set top */
+  transform:translateX(-50%);
+  /* allow auto height so content defines size, but keep padding */
+  height:auto;
+  line-height:1;
+  background:rgba(0,0,0,0.55);
+  color:#fff;
+  padding:2%;
+  border-radius:6px;
+  font-weight:700;
+  font-size:2.1rem; /* double size */
+  align-items:center;justify-content:center;z-index:11;white-space:normal;max-width:90%;text-align:center;
+}
+.slot-overlay-secondary{
+  position:absolute;
+  left:50%;
+  top:auto; /* JS will set top */
+  transform:translateX(-50%);
+  height:auto;
+  background:rgba(0,0,0,0.55);
+  color:#fff;
+  padding:1rem 1rem;
+  border-radius:6px;
+  font-weight:600;
+  font-size:1.05rem; /* slightly smaller than primary */
+  align-items:center;justify-content:center;z-index:10;white-space:normal;max-width:92%;text-align:center;
+}
 
-.carousel-dots{position:absolute;left:50%;transform:translateX(-50%);bottom:8px;display:flex;gap:6px;z-index:10}
-.carousel-dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,0.5);border:none}
-.carousel-dot.active{background:rgba(255,255,255,0.95)}
+@media (max-width:900px){
+  .azul-about{height:auto;padding:2rem 1rem}
+  /* mobile: single column carousel, each slot occupies full width */
+  .azul-carousel{grid-template-columns:1fr}
+  .azul-slot{width:100%;grid-column:1/ -1}
+  /* ensure only one visible at a time by showing slot-0 and hiding others; JS will still map images */
+  .azul-carousel > .azul-slot{display:none}
+  .azul-carousel > .azul-slot.slot-0{display:block}
+  /* overlays occupy full slot and are centered */
+  .slot-overlay-primary, .slot-overlay-secondary{width:90%}
 
-/* content below carousel - full width but centered inner */
-.azul-main-body{padding:2rem 1rem;color:var(--azul-text)}
-.azul-content{max-width:1200px;padding:0 1rem;margin:0 auto;text-align:left}
-.azul-cta{display:inline-block;margin-top:1rem;padding:0.6rem 1rem;background:var(--azul-accent);color:#00293b;border-radius:6px;text-decoration:none}
+  /* on mobile show overlays for the visible slot (slot-0) */
+  .azul-carousel > .azul-slot.slot-0 .slot-overlay-primary,
+  .azul-carousel > .azul-slot.slot-0 .slot-overlay-secondary{
+    display:flex;
+  }
+
+  :root{ --overlay-primary-h: 10%; }
+  .slot-overlay-primary{font-size:1rem}
+  .slot-overlay-secondary{font-size:0.9rem}
+}
